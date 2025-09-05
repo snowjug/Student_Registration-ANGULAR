@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVA University - Student Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="login-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <div class="logo-container">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1756970335/pplx_project_search_images/c7758b4228a5d2858e6e461a267f0ad59df0c61e.png" alt="REVA University Campus" class="campus-image">
+                    <div class="logo-content">
+                        <div class="university-logo">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1756970335/pplx_project_search_images/912fb95794560cb5f0469e3f3171f27ce7ebf585.png" alt="REVA Symbol" class="reva-symbol">
+                            <div class="logo-text">
+                                <h1>REVA UNIVERSITY</h1>
+                                <p>Bangalore, Karnataka</p>
+                            </div>
+                        </div>
+                        <div class="tagline">
+                            <p>Technology-based Education | 15,000+ Students | 45 Acres Campus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form Section -->
+            <div class="form-section">
+                <div class="login-card">
+                    <h2>Welcome to Student Portal</h2>
+                    <p class="subtitle">Please login to access your account</p>
+                    
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="student-id">Student ID</label>
+                            <input type="text" id="student-id" name="studentId" placeholder="Enter your Student ID" required>
+                            <div class="error-message" id="student-id-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="remember-me" name="remember">
+                            <label for="remember-me">Remember me</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full-width">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login
+                        </button>
+                    </form>
+
+                    <div class="form-footer">
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                        <p class="signup-link">
+                            New Student? 
+                            <a href="#" onclick="showPage('registration-page')">Register Here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Page -->
+    <div id="registration-page" class="page">
+        <div class="registration-container">
+            <div class="registration-header">
+                <div class="header-content">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1756970335/pplx_project_search_images/912fb95794560cb5f0469e3f3171f27ce7ebf585.png" alt="REVA Symbol" class="reva-symbol-small">
+                    <div>
+                        <h1>Student Registration</h1>
+                        <p>REVA University, Bangalore</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="registration-form-container">
+                <form id="registration-form">
+                    <!-- Personal Information -->
+                    <div class="form-section-header">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" name="fullName" placeholder="Enter your full name" required>
+                            <div class="error-message" id="full-name-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit phone number" required>
+                            <div class="error-message" id="phone-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input type="date" id="dob" name="dateOfBirth" required>
+                            <div class="error-message" id="dob-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" class="form-control">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="form-section-header">
+                        <h3><i class="fas fa-graduation-cap"></i> Academic Information</h3>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="course">Course Interested *</label>
+                            <select id="course" name="course" class="form-control" required>
+                                <option value="">Select Course</option>
+                                <option value="B.Tech Computer Science & Engineering">B.Tech Computer Science & Engineering</option>
+                                <option value="B.Tech Artificial Intelligence & Machine Learning">B.Tech Artificial Intelligence & Machine Learning</option>
+                                <option value="B.Tech Information Science & Engineering">B.Tech Information Science & Engineering</option>
+                                <option value="B.Tech Electronics & Communication Engineering">B.Tech Electronics & Communication Engineering</option>
+                                <option value="B.Tech Mechanical Engineering">B.Tech Mechanical Engineering</option>
+                                <option value="B.Tech Civil Engineering">B.Tech Civil Engineering</option>
+                                <option value="B.Com">B.Com</option>
+                                <option value="BBA">BBA</option>
+                                <option value="M.Tech Computer Science">M.Tech Computer Science</option>
+                                <option value="M.Tech AI">M.Tech AI</option>
+                                <option value="MBA">MBA</option>
+                                <option value="B.Arch">B.Arch</option>
+                            </select>
+                            <div class="error-message" id="course-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="previous-education">Previous Education</label>
+                            <select id="previous-education" name="previousEducation" class="form-control">
+                                <option value="">Select Education</option>
+                                <option value="12th">12th Standard</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="graduation">Graduation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="percentage">Percentage/CGPA</label>
+                            <input type="text" id="percentage" name="percentage" placeholder="Enter percentage or CGPA">
+                        </div>
+                    </div>
+
+                    <!-- Address Information -->
+                    <div class="form-section-header">
+                        <h3><i class="fas fa-home"></i> Address Information</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Complete Address *</label>
+                        <textarea id="address" name="address" placeholder="Enter your complete address" rows="3" required></textarea>
+                        <div class="error-message" id="address-error"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" placeholder="Enter city" required>
+                            <div class="error-message" id="city-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <input type="text" id="state" name="state" placeholder="Enter state" required>
+                            <div class="error-message" id="state-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">PIN Code *</label>
+                            <input type="text" id="pincode" name="pincode" placeholder="Enter PIN code" required>
+                            <div class="error-message" id="pincode-error"></div>
+                        </div>
+                    </div>
+
+                    <!-- Login Credentials -->
+                    <div class="form-section-header">
+                        <h3><i class="fas fa-key"></i> Login Credentials</h3>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="student-id-display">Student ID</label>
+                            <input type="text" id="student-id-display" name="studentIdDisplay" placeholder="Auto-generated" readonly>
+                            <small class="help-text">Your Student ID will be auto-generated</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-password">Create Password *</label>
+                            <div class="password-input">
+                                <input type="password" id="reg-password" name="regPassword" placeholder="Create a strong password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('reg-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill"></div>
+                                </div>
+                                <span class="strength-text"></span>
+                            </div>
+                            <div class="error-message" id="reg-password-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password *</label>
+                            <div class="password-input">
+                                <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="confirm-password-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" target="_blank">Terms and Conditions</a> *</label>
+                        <div class="error-message" id="terms-error"></div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="showPage('login-page')">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Login
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <div class="dashboard-container">
+            <!-- Dashboard Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1756970335/pplx_project_search_images/912fb95794560cb5f0469e3f3171f27ce7ebf585.png" alt="REVA Symbol" class="reva-symbol-small">
+                    <div class="header-text">
+                        <h2>REVA University</h2>
+                        <p>Student Portal</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name" id="dashboard-user-name">Student Name</span>
+                            <span class="user-role">Student</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Navigation -->
+            <nav class="dashboard-nav">
+                <div class="nav-items">
+                    <a href="#" class="nav-item active" data-section="overview">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Overview
+                    </a>
+                    <a href="#" class="nav-item" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
+                    <a href="#" class="nav-item" data-section="academic">
+                        <i class="fas fa-graduation-cap"></i>
+                        Academic Info
+                    </a>
+                    <a href="#" class="nav-item" data-section="fees">
+                        <i class="fas fa-credit-card"></i>
+                        Fee Status
+                    </a>
+                    <a href="#" class="nav-item" data-section="support">
+                        <i class="fas fa-headset"></i>
+                        Support
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Dashboard Content -->
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <div id="overview-section" class="content-section active">
+                    <div class="welcome-banner">
+                        <h3>Welcome back, <span id="welcome-user-name">Student</span>!</h3>
+                        <p>Here's your academic dashboard overview</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Student ID</h4>
+                                <p id="stat-student-id">R2025XXX</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Course</h4>
+                                <p id="stat-course">Course Name</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Semester</h4>
+                                <p id="stat-semester">1st Semester</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Fee Status</h4>
+                                <p id="stat-fee-status" class="status">Paid</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h4>Quick Actions</h4>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="showSection('profile')">
+                                <i class="fas fa-user-edit"></i>
+                                Update Profile
+                            </button>
+                            <button class="action-btn" onclick="showSection('academic')">
+                                <i class="fas fa-graduation-cap"></i>
+                                View Academic Info
+                            </button>
+                            <button class="action-btn" onclick="showSection('fees')">
+                                <i class="fas fa-receipt"></i>
+                                Check Fees
+                            </button>
+                            <button class="action-btn" onclick="showSection('support')">
+                                <i class="fas fa-question-circle"></i>
+                                Get Support
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile-section" class="content-section">
+                    <h3>Student Profile</h3>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="profile-details" id="profile-details">
+                                <!-- Profile details will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Section -->
+                <div id="academic-section" class="content-section">
+                    <h3>Academic Information</h3>
+                    <div class="academic-info" id="academic-info">
+                        <!-- Academic info will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Fees Section -->
+                <div id="fees-section" class="content-section">
+                    <h3>Fee Status</h3>
+                    <div class="fees-info" id="fees-info">
+                        <!-- Fee info will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Support Section -->
+                <div id="support-section" class="content-section">
+                    <h3>Support & Help</h3>
+                    <div class="support-content">
+                        <div class="support-cards">
+                            <div class="support-card">
+                                <i class="fas fa-phone"></i>
+                                <h4>Contact Support</h4>
+                                <p>Call us: +91 80-4696-5555</p>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email Support</h4>
+                                <p>support@reva.edu.in</p>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-question-circle"></i>
+                                <h4>FAQ</h4>
+                                <p>Find answers to common questions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
